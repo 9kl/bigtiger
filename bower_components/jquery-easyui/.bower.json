@@ -1,0 +1,27 @@
+{
+  "name": "jquery-easyui",
+  "version": "1.5.2",
+  "dependencies": {
+    "jquery": "~3.1.0"
+  },
+  "authors": [
+    "waylau <waylau521@gmail.com>"
+  ],
+  "description": "easyui lib for git and bower。为bower提供eaasyui库",
+  "main": "jquery.easyui.min.js",
+  "keywords": [
+    "easyui",
+    "1.5.2"
+  ],
+  "license": "GPL",
+  "homepage": "https://github.com/waylau/jquery-easyui",
+  "_release": "1.5.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.5.2",
+    "commit": "e1a8ff5fe37ee96e9d5b1f432ff5ce882f09b486"
+  },
+  "_source": "https://github.com/waylau/jquery-easyui.git",
+  "_target": "*",
+  "_originalSource": "jquery.easyui"
+}

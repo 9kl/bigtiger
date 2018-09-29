@@ -1,0 +1,14 @@
+{
+  "name": "My97DatePicker",
+  "homepage": "https://github.com/lidingning/My97DatePicker",
+  "version": "0.1.0",
+  "_release": "0.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.0",
+    "commit": "090b58319fb47f3c4e5336328adbd9ee921b284c"
+  },
+  "_source": "https://github.com/lidingning/My97DatePicker.git",
+  "_target": "^0.1.0",
+  "_originalSource": "My97DatePicker"
+}

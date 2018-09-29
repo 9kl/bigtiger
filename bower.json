@@ -1,0 +1,28 @@
+{
+  "name": "bigtiger",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery-easyui": "jquery.easyui#*",
+    "backbone": "^1.3.3",
+    "underscore": "^1.8.3",
+    "My97DatePicker": "^0.1.0",
+    "highcharts": "^5.0.12",
+    "layer": "^3.0.3",
+    "moment": "^2.18.1"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js",
+        "dist/fonts/*"
+      ]
+    }
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2"
+  }
+}
