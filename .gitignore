@@ -9,6 +9,11 @@ __pycache__/
 # nodejs
 node_modules/
 
+# eclipse
+.project
+.pydevproject
+.settings/
+
 # Distribution / packaging
 .Python
 build/
