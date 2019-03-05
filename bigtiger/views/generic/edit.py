@@ -110,6 +110,8 @@ class ProcessFormView(UserLogMixin, View):
                 result['PAGE_ERRORS'] = e.excel_errors
             except Exception as e:
                 error_msg = '操作失败，请重试。'
+                if settings.DEBUG:
+                    print e.message
 
             if error_msg is None:
                 result['successinfo'] = '操作成功。'

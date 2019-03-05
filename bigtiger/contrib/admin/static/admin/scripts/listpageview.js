@@ -180,33 +180,14 @@ var ListPageView = (function () {
     	}
 
     	messager.deleteConfirm(function (index) {
-    		var url = self.getDeleteUrl(rows),
-    			csrf = $("input[name='csrfmiddlewaretoken']").val();
-
-    		/*
-    		XMLHttpRequest send form data
-			https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_forms_through_JavaScript
-    		*/
-    		var xhr = new XMLHttpRequest();
-            xhr.responseType='json';
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState != 4) {
-                    return;
-                }
-                
-                if (xhr.status == 200) {
-                    var data = xhr.response;
-                    messager.toast(data.message);
-                    if (data.success) {
-	    				self.dataGrid.reload();
-	    			}
-                }
-            };
-            xhr.open('POST', url);
-            xhr.withCredentials = true;
-            //  add header
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send("csrfmiddlewaretoken=" + csrf);
+    		var url = self.getDeleteUrl(rows);
+    		
+    		self.ajaxPost(url, function (data) {
+    			messager.toast(data.message);
+                if (data.success) {
+    				self.dataGrid.reload();
+    			}
+    		});
     	});
 	};
 
@@ -249,6 +230,72 @@ var ListPageView = (function () {
 		var urlTemp = _.template('<%= baseUrl %>?<%= queryString %>');
 		return urlTemp({'baseUrl': baseUrl, 'queryString': $.param(queryParams)});
 	};
+
+	Constr.prototype.ajaxPost = function (url, success, error) {
+		var self = this,
+			csrf = $("input[name='csrfmiddlewaretoken']").val();
+
+		/*
+		XMLHttpRequest send form data
+		https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_forms_through_JavaScript
+		*/
+		var xhr = new XMLHttpRequest();
+        xhr.responseType='json';
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) {
+                return;
+            }
+            
+            if (xhr.status == 200) {
+                var data = xhr.response;
+                if (typeof success == 'function') {
+                	success(data);
+                }
+            } else {
+            	if (typeof error == 'function') {
+                	error(xhr.statusText);
+                }
+            }
+        };
+        xhr.open('POST', url);
+        xhr.withCredentials = true;
+
+        //  add header
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("csrfmiddlewaretoken=" + csrf);
+	};
+
+	Constr.prototype.ajaxGet = function(url, success, error) {
+		var self = this;
+
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'json';
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState !== 4) {
+                return;
+            }
+
+            if (xhr.status === 200) {
+                var res = xhr.response;
+                if (typeof success == 'function') {
+                	success(res);
+                }
+            } else {
+            	if (typeof error == 'function') {
+                	error(xhr.statusText);
+                }
+            }
+        };
+
+        xhr.open('get', url);
+        xhr.withCredentials = true;
+
+        xhr.send();
+    };
+
+    Constr.prototype.urlParam = function (url, param) {
+    	return url + (url.indexOf('?') < 0 ? '?' : '&') + $.param(param);
+    };
 
 	return Constr;
 })();

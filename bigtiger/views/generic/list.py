@@ -107,7 +107,37 @@ class BaseListView(MultipleObjectMixin, PermissionMixin, View):
 
 
 class MultipleObjectTemplateResponseMixin(TemplateResponseMixin):
-    pass
+    template_extend_names = None
+    template_extend_dynamic = False
+
+    def render_to_response(self, context, **response_kwargs):
+        """
+        Returns a response, using the `response_class` for this
+        view, with a template rendered with the given context.
+
+        If any keyword arguments are provided, they will be
+        passed to the constructor of the response class.
+        """
+        if self.template_extend_dynamic:
+            extend_name = self.request.GET.get('_extend', 'default')
+            extends = self.get_template_extend_names()
+            context.update({'d_extend': extends.get(extend_name, None)})
+
+        response_kwargs.setdefault('content_type', self.content_type)
+        return self.response_class(
+            request=self.request,
+            template=self.get_template_names(),
+            context=context,
+            **response_kwargs
+        )
+
+    def get_template_extend_names(self):
+        if self.template_extend_names is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_extend_names' or an implementation of 'get_template_extend_names()'")
+        else:
+            return self.template_extend_names
 
 
 class ListView(MultipleObjectTemplateResponseMixin, BaseListView):

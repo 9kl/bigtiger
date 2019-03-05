@@ -42,7 +42,7 @@ var EasyDataGrid = (function() {
                     var res = xhr.response;
                     success(res);
                 } else {
-                    error(xhr.statusText)
+                    error(xhr.statusText);
                 }
             };
             
