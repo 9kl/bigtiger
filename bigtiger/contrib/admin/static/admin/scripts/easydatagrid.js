@@ -30,6 +30,10 @@ var EasyDataGrid = (function() {
         loadError: function(tableName) {},
         loader: function(param, success, error) {
             var opts = $(this).datagrid("options");
+            if (!opts.url) {
+                error('url为空。');
+                return;
+            }
 
             var xhr = new XMLHttpRequest();
             xhr.responseType = 'json';
