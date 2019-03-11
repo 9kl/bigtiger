@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='bigtiger',
-    version='0.3.6',
+    version='0.3.7',
     author='bigtiger',
     author_email='chinafengheping@gmail.com',
     url='http://www.hshl.ltd',

@@ -126,7 +126,7 @@ gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('uninstall', shell.task('sudo pip uninstall bigtiger'));
 gulp.task('wheel', shell.task(['python setup.py bdist_wheel'], {'cwd': '/Users/fhp/github/bigtiger/dist'}));
-gulp.task('install', shell.task(['sudo pip install bigtiger-0.3.6-py2-none-any.whl'], {'cwd': '/Users/fhp/github/bigtiger/dist/dist'}));
+gulp.task('install', shell.task(['sudo pip install bigtiger-0.3.7-py2-none-any.whl'], {'cwd': '/Users/fhp/github/bigtiger/dist/dist'}));
 
 gulp.task('build', gulpSequence('clean', 'dist', 'static'));
 // gulp.task('setup', gulpSequence('uninstall', 'wheel', 'install'));
