@@ -25,6 +25,25 @@ B.namespace = function (ns_string) {
 
 /*
 ********************************************************
+B.Guid                             
+********************************************************
+*/
+B.namespace('B.Guid');
+B.Guid = (function(){
+	var S4 = function () {
+		return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+	};
+	
+	var Constr = function () {
+		this.newid = function () {
+			return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+		};
+	};
+	return new Constr();
+})();
+
+/*
+********************************************************
 B.sl                              
 ********************************************************
 */
