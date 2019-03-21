@@ -425,6 +425,8 @@ var ProductView = Backbone.View.extend({
 
         if (menu_target === 'iframe') {
             menu_url = '/iframe/?url=' + menu_url;
+        } else if (menu_target === 'iframe_scroll') {
+            menu_url = '/iframe_scroll/?url=' + menu_url;
         }
 
         var xhr = new XMLHttpRequest();
@@ -440,7 +442,7 @@ var ProductView = Backbone.View.extend({
             }
         };
         xhr.open('GET', menu_url);
-
+        
         if (is_cross == 1) {
             xhr.withCredentials = true;
         }
