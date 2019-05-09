@@ -9,7 +9,8 @@
     "My97DatePicker": "^0.1.0",
     "highcharts": "^5.0.12",
     "layer": "^3.0.3",
-    "moment": "^2.18.1"
+    "moment": "^2.18.1",
+    "datagrid-groupview": "https://www.jeasyui.com/easyui/datagrid-groupview.js"
   },
   "overrides": {
     "bootstrap": {

@@ -32,9 +32,11 @@ var EasyTree = (function () {
 
         this.el = $tree;
 
-        this.getChecked = function () {
-            var nodes = $tree.tree('getChecked');
-            return nodes;
+        this.getChecked = function (state) {
+            if (state !== undefined) {
+                return $tree.tree('getChecked', state);
+            }
+            return $tree.tree('getChecked');
         };
 
         this.getLeafChecked = function () {
@@ -60,16 +62,18 @@ var EasyTree = (function () {
 
         this.check = function (nodeId) {
             var node = $tree.tree('find', nodeId);
-            $tree.tree('check', node.target);
-
+            var isLeaf = $tree.tree('isLeaf', node.target);
+            if (isLeaf) {
+                $tree.tree('check', node.target);
+            }
         };
 
-        this.saveViewState = function (isLeaf) {
+        this.saveViewState = function (isLeaf, state) {
             var nodes = [];
             if (isLeaf) {
                 nodes = this.getLeafChecked();
             } else {
-                nodes = this.getChecked();
+                nodes = this.getChecked(state);
             }
 
             var ids = _.map(nodes, function (node) {return node.id;});

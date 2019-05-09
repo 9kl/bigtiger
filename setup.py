@@ -1,12 +1,14 @@
 from setuptools import setup, find_packages
 
+import bigtiger
+
 
 # MANIFEST.in https://docs.python.org/2/distutils/sourcedist.html#the-manifest-in-template
 # https://packaging.python.org/tutorials/distributing-packages/
 
 setup(
     name='bigtiger',
-    version='0.3.8',
+    version=bigtiger.__version__,
     author='bigtiger',
     author_email='chinafengheping@gmail.com',
     url='http://www.hshl.ltd',

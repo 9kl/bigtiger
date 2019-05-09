@@ -1,0 +1,15 @@
+{
+  "name": "datagrid-groupview",
+  "_cacheHeaders": {
+    "ETag": "\"35fc-5868927684558-gzip\"",
+    "Last-Modified": "Mon, 15 Apr 2019 03:21:53 GMT",
+    "Content-Length": "3313",
+    "Content-Type": "application/javascript"
+  },
+  "_release": "e-tag:35fc-5868",
+  "main": "index.js",
+  "_source": "https://www.jeasyui.com/easyui/datagrid-groupview.js",
+  "_target": "*",
+  "_originalSource": "https://www.jeasyui.com/easyui/datagrid-groupview.js",
+  "_direct": true
+}
