@@ -28,9 +28,8 @@ input:-webkit-autofill {
     height: 100%;
     margin: 0;
     padding: 0;
-
     opacity: 1;
-    background: url('{% static "iconstore/page.jpg" %}') no-repeat 0px -200px;
+    background: url('/static/admin/images/page.jpg') no-repeat 0px -200px;
 }
 
 .header {
@@ -40,7 +39,7 @@ input:-webkit-autofill {
     height: 70px;
     line-height: 70px;
     width: 100%;
-    background: url('{% static "iconstore/logo_white.png" %}') no-repeat 50px center;
+    background: url('/static/admin/images/logo_white.png') no-repeat 50px center;
     text-indent: 115px;
     border: none;
 }
@@ -159,7 +158,7 @@ input:-webkit-autofill {
 
 .errorbox {
     padding: 2px 0px;
-    background: url('{% static "admin/images/icon/16x16/icon_alert.png" %}') no-repeat left center;
+    background: url('/static/admin/images/icon/16x16/icon_alert.png') no-repeat left center;
     text-indent: 20px;
     display: none;
     color: red;
@@ -194,17 +193,17 @@ input:-webkit-autofill {
 }
 
 .android {
-    background: #90be2d url('{% static "admin/images/icon/16x16/icon-android.png" %}') no-repeat 5px center;
+    background: #90be2d url('/static/admin/images/icon/16x16/icon-android.png') no-repeat 5px center;
     text-indent: 22px;
 }
 
 .ipad {
-    background: #e56239 url('{% static "admin/images/icon/16x16/icon-ipad.png" %}') no-repeat 5px center;
+    background: #e56239 url('/static/admin/images/icon/16x16/icon-ipad.png') no-repeat 5px center;
     text-indent: 22px;
 }
 
 .windows {
-    background: #5188c6 url('{% static "admin/images/icon/16x16/icon-windows.png" %}') no-repeat 5px center;
+    background: #5188c6 url('/static/admin/images/icon/16x16/icon-windows.png') no-repeat 5px center;
     text-indent: 22px;
     margin-right: 0px;
 }
@@ -269,7 +268,7 @@ input:-webkit-autofill {
                     </form>
                 </div>
                 {% block apps %}
-                <div class="apps">
+                <div class="apps" style="display: none;">
                     <ul class="app-items clearfix">
                         <li class="app android"><a href="#">android</a></li>
                         <li class="app ipad"><a href="#">ios</a></li>

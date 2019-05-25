@@ -7,7 +7,6 @@ Created on 2017-6-22
 
 from __future__ import unicode_literals, print_function
 
-import logging
 from django.conf import settings
 from django.views.generic.base import TemplateResponseMixin, ContextMixin, View
 
@@ -74,7 +73,13 @@ class MultipleObjectMixin(ContextMixin):
     @property
     def page_size(self):
         """获取分页每页显示的记录条数"""
-        return int(self.request.GET.get(self.page_size_kwarg, settings.EXPORT_PAGESIZE))
+        page_size = self.request.GET.get(self.page_size_kwarg, None)
+        if page_size:
+            return int(page_size)
+
+        if hasattr(settings, 'EXPORT_PAGESIZE'):
+            return int(settings.EXPORT_PAGESIZE)
+        return 1000
 
     @property
     def page_limit(self):

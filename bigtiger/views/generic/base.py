@@ -31,6 +31,8 @@ def permission(fn):
                 redirect_url = settings.LOGOUT_URL
             return TemplateResponse(request, 'admin/redirect_template.htm', {'redirect_url': redirect_url})
         except Exception as e:
+            if settings.DEBUG:
+                print(e)
             return HttpResponseServerError(e)
     return _permission
 

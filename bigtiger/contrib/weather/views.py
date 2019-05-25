@@ -24,10 +24,11 @@ from bigtiger.views.decorators import jsonresponse
 
 def _get_baidu_weather_url():
     if not hasattr(settings, 'BAIDU_WEATHER_AK'):
-        raise ImproperlyConfigured('BAIDU_WEATHER_AK')
+        raise ImproperlyConfigured('BAIDU_WEATHER_AK not find in settings')
 
     if not hasattr(settings, 'BAIDU_WEATHER_LOCATION'):
-        raise ImproperlyConfigured('BAIDU_WEATHER_LOCATION')
+        raise ImproperlyConfigured(
+            'BAIDU_WEATHER_LOCATION  not find in settings')
 
     ak = settings.BAIDU_WEATHER_AK
     location = settings.BAIDU_WEATHER_LOCATION

@@ -23,7 +23,7 @@ app.weatherData = (function() {
                         }
                     }
                 };
-                xhr.open('GET', '/weather/');
+                xhr.open('GET', '/admin/baidu_weather/');
                 xhr.send();
         };
     };

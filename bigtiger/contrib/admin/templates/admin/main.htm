@@ -34,7 +34,7 @@
 		<div class="header">
 			<div class="header_logo clearfix">
 				{% block sys_logo %}
-				<img class="logo" src="{% static 'iconstore/logo.png' %}" alt="系统logo">
+				<img class="logo" src="/static/admin/images/logo.png" alt="logo">
 				{% endblock %}
 				
 				{% block sys_name %}
@@ -96,12 +96,12 @@
 					<li><span>您好：</span><span style="color:#64ff50; font-size:14px; font-weight: bold;">{{user.user_name}}</span></li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<img src="{% static '/static/admin/images/icon/16x16/icon_more.png' %}" />
+							<img src="/static/admin/images/icon/16x16/icon_more.png" />
 						</a>
 						<ul class="header_user_menu dropdown-menu">
 							<li id="modify_pwd" class="icon_change"><a href="javascript:modifyPwd()">修改密码</a></li>
-							<li id="change_user" class="icon_reset"><a href="/">切换用户</a></li>
-							<li id="exit_sys" class="icon_exit"><a href="/logout/">退出</a></li>
+							<li id="change_user" class="icon_reset"><a href="/admin/login/">切换用户</a></li>
+							<li id="exit_sys" class="icon_exit"><a href="/admin/logout/">退出</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -337,5 +337,55 @@ app.ui = {
 			console.log(e);
 		}
 	});
+
+	function modifyPwd() {
+		var self = this,
+    		url = '/admin/password_change/',
+    		width = '800px',
+    		height = '400px',
+    		title = '修改密码';
+		win.openDialog(title, url, width, height, function (layerId) {
+			layer.close(layerId);
+		});
+	}
+	
+	(function() {
+		humanize.sysbooks = [];
+		humanize.getSysBook = function (class_code, code) {
+			var lst = _.filter(humanize.sysbooks, function(item){ return item['class'] == class_code; });
+			var result = {},
+				item = null;
+			
+			for (var i=0, max=lst.length; i<max; i++) {
+				item = lst[i];
+				result[item['code']] = item['text'];
+			}
+			
+			if (code) {
+				return result[code];
+			}
+			return result;
+		};
+		
+		var xhr = new XMLHttpRequest();
+        xhr.responseType='json';
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) {
+                return;
+            }
+            
+            if (xhr.status == 200) {
+                var data = xhr.response;
+                if (data) {
+                		humanize.sysbooks = _.map(data, function(item) {
+                			return {'class': item['class_code'], 'code': item['code'], 
+                				'text': item['text'], 'order_number': item['order_number']};
+                		});
+                }
+            }
+        };
+        xhr.open('GET', '/admin/api/sys_book/');
+        xhr.send();
+	})();
 </script>
 {% endblock %}

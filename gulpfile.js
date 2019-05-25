@@ -106,6 +106,11 @@ gulp.task('My97DatePicker', () => {
   .pipe(gulp.dest('dist/static/My97DatePicker/'));
 });
 
+gulp.task('iconstore', () => {
+  return gulp.src(['bigtiger/contrib/admin/static/iconstore/**/*'])
+  .pipe(gulp.dest('dist/static/iconstore/'));
+});
+
 gulp.task('static', () => {
   return gulp.src(['dist/static/**/*'])
   .pipe(gulp.dest('dist/bigtiger/contrib/admin/static/'));
@@ -118,7 +123,7 @@ gulp.task('pyc', () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('dist', ['pyc', 'conf', 'html', 'images', 'setup', 'layer_skin', 'easyui_images', 'My97DatePicker'], () => {
+gulp.task('dist', ['pyc', 'conf', 'html', 'images', 'setup', 'layer_skin', 'easyui_images', 'My97DatePicker', 'iconstore'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
