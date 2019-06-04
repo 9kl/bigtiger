@@ -9,6 +9,7 @@ from __future__ import unicode_literals
 
 import json
 
+from bigtiger.contrib.admin.models.auth_permission import AuthPermissionModel
 from bigtiger.core.exceptions import AuthenticateError, SuspiciousOperation
 from bigtiger.forms.forms import BaseForm
 from bigtiger.views.generic import (SysConfContextMixin, TemplateResponseMixin,
@@ -99,6 +100,7 @@ class LoginView(SysConfContextMixin, TemplateResponseMixin, View):
             self.request.session[settings.PERMISSIONS_SESSION_KEY] = permissions
             return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
 
+    """
     def get_permissions(self, user):
         backend_path = user.backend
         if backend_path in settings.AUTHENTICATION_BACKENDS:
@@ -107,6 +109,19 @@ class LoginView(SysConfContextMixin, TemplateResponseMixin, View):
             return permissions
         else:
             return None
+    """
+
+    def get_permissions(self, user):
+        m = AuthPermissionModel()
+
+        permissions = []
+        if user.is_superuser == 1:
+            permissions = m.get_list_system()
+        else:
+            role_str = user.roles
+            roles = role_str.split(',')
+            permissions = m.get_list_groups(roles)
+        return permissions
 
 
 class PwdModifyView(UpdateView):
