@@ -424,9 +424,9 @@ var ProductView = Backbone.View.extend({
             is_cross = is_cross || menuItem.is_cross;
 
         if (menu_target === 'iframe') {
-            menu_url = '/iframe/?url=' + menu_url;
+            menu_url = '/admin/iframe/?url=' + menu_url;
         } else if (menu_target === 'iframe_scroll') {
-            menu_url = '/iframe_scroll/?url=' + menu_url;
+            menu_url = '/admin/iframe_scroll/?url=' + menu_url;
         }
 
         var xhr = new XMLHttpRequest();

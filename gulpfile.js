@@ -123,7 +123,7 @@ gulp.task('pyc', () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('dist', ['pyc', 'conf', 'html', 'images', 'setup', 'layer_skin', 'easyui_images', 'My97DatePicker', 'iconstore'], () => {
+gulp.task('dist', ['pyc', 'conf', 'html', 'images', 'setup', 'layer_skin', 'easyui_images', 'My97DatePicker'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 

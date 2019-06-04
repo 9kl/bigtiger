@@ -35,7 +35,7 @@ class AuthPermissionEditForm(BaseForm):
                                      widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
     menu_url_debug = forms.CharField(label='菜单URL调试', required=False, max_length=200,
                                      widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
-    menu_target = forms.CharField(label='菜单目标', required=False, max_length=20)
+    menu_target = forms.ChoiceField(label='菜单目标', required=False)
     fast_url = forms.CharField(label='快捷URL', required=False, max_length=200,
                                widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
     big_icon = forms.CharField(label='大图标', required=False, max_length=200,
@@ -70,6 +70,7 @@ class AuthPermissionEditForm(BaseForm):
         self.fields['is_cross'].choices = ((0, '否'), (1, '是'))
         self.fields['is_debug'].choices = ((0, '否'), (1, '是'))
         self.fields['status'].choices = ((1, '显示菜单'), (0, '隐示菜单'))
+        self.fields['menu_target'].choices = (('inner', 'inner'), ('iframe', 'iframe'), ('iframe_scroll', 'iframe_scroll'),)
 
         self.parent_id_choice()
 

@@ -9,18 +9,17 @@ from __future__ import unicode_literals
 
 import json
 
+from bigtiger.core.exceptions import AuthenticateError, SuspiciousOperation
+from bigtiger.forms.forms import BaseForm
+from bigtiger.views.generic import (SysConfContextMixin, TemplateResponseMixin,
+                                    UpdateView, View)
 from django import forms
 from django.conf import settings
 from django.contrib import auth
 from django.shortcuts import HttpResponseRedirect
 from django.utils.module_loading import import_string
-
-from django_sae.models.user import UserModel
 from django_restful import RestfulApiError
-
-from bigtiger.forms.forms import BaseForm
-from bigtiger.core.exceptions import AuthenticateError, SuspiciousOperation
-from bigtiger.views.generic import UpdateView, TemplateResponseMixin, View, SysConfContextMixin
+from django_sae.models.user import UserModel
 
 
 def load_backend(path):

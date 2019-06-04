@@ -73,7 +73,7 @@ DATABASES = {
 
 SQLALCHEMY_DATABASES = {
     'auth': {
-        'SQLALCHEMY_DATABASE_URI': 'postgresql+psycopg2://postgres:password@10.13.40.217:9501/bigtree',
+        'SQLALCHEMY_DATABASE_URI': 'postgresql+psycopg2://postgres:linkeddt.c0m@106.13.40.217:9501/bigtree',
         'SQLALCHEMY_NATIVE_UNICODE': None,
         'SQLALCHEMY_ECHO': False,
         'SQLALCHEMY_RECORD_QUERIES': None,
