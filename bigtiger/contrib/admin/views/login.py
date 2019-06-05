@@ -100,8 +100,15 @@ class LoginView(SysConfContextMixin, TemplateResponseMixin, View):
             self.request.session[settings.PERMISSIONS_SESSION_KEY] = permissions
             return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
 
-    """
     def get_permissions(self, user):
+        mode = getattr(settings, 'AUTHENTICATION_MODE', 'local')
+
+        if mode == 'local':
+            return self.get_local_permissions(user)
+        else:
+            return self.get_remote_permissions(user)
+
+    def get_remote_permissions(self, user):
         backend_path = user.backend
         if backend_path in settings.AUTHENTICATION_BACKENDS:
             backend = load_backend(user.backend)
@@ -109,9 +116,8 @@ class LoginView(SysConfContextMixin, TemplateResponseMixin, View):
             return permissions
         else:
             return None
-    """
 
-    def get_permissions(self, user):
+    def get_local_permissions(self, user):
         m = AuthPermissionModel()
 
         permissions = []

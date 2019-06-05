@@ -162,6 +162,7 @@ PERMISSIONS_SESSION_KEY = '_auth_user_permissions'
 ##################
 
 AUTHENTICATION_BACKENDS = ('django_sae.auth.backends.ModelBackend',)
+AUTHENTICATION_MODE = 'remote'
 
 LOGIN_URL = '/admin/'
 
