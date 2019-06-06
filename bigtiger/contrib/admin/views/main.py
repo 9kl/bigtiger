@@ -9,11 +9,11 @@ from __future__ import unicode_literals
 
 import json
 
-from django.utils.safestring import mark_safe
-from django.shortcuts import HttpResponseRedirect
-
 from bigtiger.utils.tree import tree_sorted
-from bigtiger.views.generic import TemplateResponseMixin, View, SysConfContextMixin, PermissionMixin
+from bigtiger.views.generic import (PermissionMixin, SysConfContextMixin,
+                                    TemplateResponseMixin, View)
+from django.shortcuts import HttpResponseRedirect
+from django.utils.safestring import mark_safe
 
 
 def menu_order(menus):
@@ -49,36 +49,33 @@ class MainView(SysConfContextMixin, PermissionMixin, TemplateResponseMixin, View
         root_menu = [item for item in ps if item['parent_id'] is None].pop()
         gen_menu_tree(root_menu, ps)
 
-        cols = self.gen_menu_cols(ps, 15)
+        cols = self.gen_menu_cols(root_menu)
         context['root_menu'] = root_menu
         context['menusJson'] = mark_safe(json.dumps(root_menu))
         context['cols'] = cols
         return self.render_to_response(context)
 
-    def gen_menu_cols(self, ps, col_count=12):
-        """ 构建菜单清单中的菜单数据，用于模板的显示
+    def gen_menu_cols(self, root_menu):
+        """ 构建菜单清单中的菜单数据(最多3级)，用于模板的显示
         """
-        lst = tree_sorted(ps, key=lambda item: item['order_number'], join=lambda item,
-                          parent_item: item['parent_id'] == parent_item['id'])
-        lst = filter(lambda item: item['depth'] < 4, lst)
+        cols = []
 
-        cols, col, index, line, mainId = [], None, 0, None, None
-        for item in lst:
-            if index % col_count == 0:
-                col = []
+        childs1 = root_menu.get('childs', [])
+        for item in childs1:
+            rows = []
+            menu_name = item['menu_name']
+            menu_id = item['id']
+
+            childs2 = item.get('childs', None)
+            if childs2:
+                for item2 in childs2:
+                    childs3 = item2.get('childs', None)
+                    if childs3 is None:
+                        rows.append(item2)
+                    else:
+                        for item3 in childs3:
+                            rows.append(item3)
+                col = {'menu_name': menu_name,
+                       'rows': rows, 'menu_id': menu_id}
                 cols.append(col)
-
-            depth = item['depth']
-
-            if depth == 1:
-                mainId = item['id']
-
-            if depth == 2:
-                line = item
-                line['children'] = []
-                col.append(line)
-            elif depth == 3:
-                item['mainId'] = mainId
-                line['children'].append(item)
-            index = index + 1
         return cols

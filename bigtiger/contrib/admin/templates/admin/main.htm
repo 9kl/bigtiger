@@ -18,10 +18,6 @@
 	.gridWrapper {overflow: hidden;overflow-x: auto;} 
 	a.detail {color: #4D90FE;} 
 	a.detail:hover{text-decoration: underline;} 
-	.container-fluid {
-	}
-	.gridWrapper {
-	}
 
 	.btns .btn {
 		display: none;
@@ -52,16 +48,15 @@
 				<div class="dropdown-menu topbar-nav-list topbar-clearfix">
 					{% for col in cols %}
 					<div class="topbar-nav-col">
-						{% for line in col %}
 						<div class="topbar-nav-item">
-							<p class="topbar-nav-item-title">{{ line.menu_name }}</p>
-							{% if line.children %}
+							<p class="topbar-nav-item-title">{{ col.menu_name }}</p>
+							{% if col.rows %}
 							<ul>
-								{% for line1 in line.children %}
-									<li data-menu="{{ line1.id }}" data-depth="{{ line1.depth }}"  data-main="{{ line1.mainId }}">
-										<a href="{{ line1.menu_url }}">
-											{% ifequal line1.is_important 1 %}<span class="red">*</span>{% endifequal %}
-											<span>{{ line1.menu_name }}</span>
+								{% for row in col.rows %}
+									<li data-menu="{{ row.id }}" data-depth="{{ row.depth }}"  data-main="{{ col.menu_id }}">
+										<a href="{{ row.menu_url }}">
+											{% ifequal row.is_important 1 %}<span class="red">*</span>{% endifequal %}
+											<span>{{ row.menu_name }}</span>
 										</a>
 									</li>
 								{% endfor %}
@@ -69,7 +64,6 @@
 							{% endif %}
 							{% if not forloop.last %}<div class="topbar-nav-gap"></div>{%endif%}
 						</div>
-						{% endfor %}
 					</div>
 					{% endfor %}
 				</div>

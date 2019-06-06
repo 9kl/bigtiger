@@ -103,6 +103,8 @@ class LoginView(SysConfContextMixin, TemplateResponseMixin, View):
     def get_permissions(self, user):
         mode = getattr(settings, 'AUTHENTICATION_MODE', 'local')
 
+        print 'mode: ' + mode
+
         if mode == 'local':
             return self.get_local_permissions(user)
         else:
@@ -122,6 +124,7 @@ class LoginView(SysConfContextMixin, TemplateResponseMixin, View):
 
         permissions = []
         if user.is_superuser == 1:
+            print 'is_superuser 1'
             permissions = m.get_list_system()
         else:
             role_str = user.roles
